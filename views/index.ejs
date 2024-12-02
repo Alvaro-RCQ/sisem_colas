@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Simulación de Colas - M/M/1</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Simulación de Colas - Modelo M/M/1</h1>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form action="/simulate" method="POST">
+      <label for="arrivalRate">Tasa de llegada (λ):</label>
+      <input type="number" name="arrivalRate" step="0.01" required>
+
+      <label for="serviceRate">Tasa de servicio (μ):</label>
+      <input type="number" name="serviceRate" step="0.01" required>
+
+      <button type="submit">Simular</button>
+    </form>
+
+    <% if (results) { %>
+      <h2>Resultados</h2>
+      <ul>
+        <li>Utilización (ρ): <%= results.ρ.toFixed(2) %></li>
+        <li>Longitud promedio de la cola (Lq): <%= results.Lq.toFixed(2) %></li>
+        <li>Número promedio en el sistema (L): <%= results.L.toFixed(2) %></li>
+        <li>Tiempo promedio en cola (Wq): <%= results.Wq.toFixed(2) %> unidades de tiempo</li>
+        <li>Tiempo promedio en el sistema (W): <%= results.W.toFixed(2) %> unidades de tiempo</li>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>
